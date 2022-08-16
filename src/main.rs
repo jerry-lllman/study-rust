@@ -1,5 +1,5 @@
 // fn greet_world() {
-//     let southern_germany = "Grüß Gott!";
+//     let southern_germany = "Grüß Got&&t!";
 //     let chinese = "世界，你好";
 //     let e&nglish = "World, hello";
 //     let regions = [southern_germany, chinese, english];
@@ -11,39 +11,66 @@
 //     greet_world()
 // }
 
-
 // https://course.rs/first-try/hello-world.html#rust-%E8%AF%AD%E8%A8%80%E5%88%9D%E5%8D%B0%E8%B1%A1
+// fn main() {
+//   let penguin_data = "\
+//   common name,length (cm)
+//   Little penguin,33
+//   Yellow-eyed penguin,65
+//   Fiordland penguin,60
+//   Invalid,data
+//   ";
+
+//   let records = penguin_data.lines();
+
+//   for (i, record) in records.enumerate() {
+//     if i == 0 || record.trim().len() == 0 {
+//       continue;
+//     }
+
+//     // 声明一个 fields 变量，类型是 Vec
+//     // Vec 是 vector 的缩写，是一个可伸缩的集合类型，可以认为是一个动态数组
+//     // <_> 表示 Vec 中的元素类型由编译器自行推断
+//     let fields: Vec<_> = record.split(',').map(|field| field.trim()).collect();
+//     // 只有在debug模式下生效
+//     if cfg!(debug_assertions) {
+//       // 输出到标准错误输出
+//       eprintln!("debug: {:?} -> {:?}", record, fields)
+//     }
+
+//     let name = fields[0];
+
+//     if let Ok(length) = fields[1].parse::<f32>() {
+//       // 输出到标准输出
+//       println!("{}, {}cm", name, length)
+//     }
+//   }
+// }
+
+// rust 的基本概念
 fn main() {
-  let penguin_data = "\
-  common name,length (cm)
-  Little penguin,33
-  Yellow-eyed penguin,65
-  Fiordland penguin,60
-  Invalid,data
-  ";
+  let a = 10;
+  // 主动指定b的类型为i32
+  let b: i32 = 20;
 
-  let records = penguin_data.lines();
+  // 可以在数值中表示数值是30，类型是i32
+  // 同时可以指定其为 mutable
+  let mut c = 30i32;
 
-  for (i, record) in records.enumerate() {
-    if i == 0 || record.trim().len() == 0 {
-      continue;
-    }
+  // 在数值和类型中间添加一个下划线，让可读性更好
+  let d = 30_i32;
+  // 跟其它语言一样，可以使用一个函数的返回值来作为另一个函数的参数
+  c = add(add(a, b), add(c, d));
 
-    // 声明一个 fields 变量，类型是 Vec
-    // Vec 是 vector 的缩写，是一个可伸缩的集合类型，可以认为是一个动态数组
-    // <_> 表示 Vec 中的元素类型由编译器自行推断
-    let fields: Vec<_> = record.split(',').map(|field| field.trim()).collect();
-    // 只有在debug模式下生效
-    if cfg!(debug_assertions) {
-      // 输出到标准错误输出
-      eprintln!("debug: {:?} -> {:?}", record, fields)
-    }
+  // println!是宏调用，看起来像是函数但是它返回的是宏定义的代码块
+  // 该函数将指定的格式化字符串输出到标准输出中(控制台)
+  // {}是占位符，在具体执行过程中，会把e的值代入进来
+  println!("( a + b ) + ( c + d ) = {}", c);
+}
 
-    let name = fields[0];
-
-    if let Ok(length) = fields[1].parse::<f32>() {
-      // 输出到标准输出
-      println!("{}, {}cm", name, length)
-    }
-  }
+// 定义一个函数，输入两个i32类型的32位有符号整数，返回它们的和
+fn add(i: i32, j: i32) -> i32 {
+  // 返回相加值，这里可以省略return
+  // i + j 后面不可以添加 ;
+  i + j
 }
