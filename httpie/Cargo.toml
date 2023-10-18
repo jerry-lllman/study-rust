@@ -1,0 +1,16 @@
+[package]
+name = "httpie"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.40" # error handling
+clap = { version = "4.0.22", features = ["derive"] }
+console = "0.15"
+jsonxf = "1"
+mime = "0.3"
+reqwest = { version = "0.11.4", features = ["json"] }
+tokio = { version = "1.21.2", features = ["full"] }
+syntect = "5.0.0"
